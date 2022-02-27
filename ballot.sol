@@ -43,8 +43,9 @@ contract Ballot {
             }));
         }
     }
-    // Here we changed the parameter from a single address to an array of addresses, 
-    // put them to memory, and called it arrayofvoter
+   
+    //I modified the code by making it take an array of addresses and removing 
+    //the unnecessary check against the voter.voted value
     
     function giveRightToVote(address[] memory arrayofvoter) public {
         require(
@@ -54,10 +55,6 @@ contract Ballot {
         //here we iterate through the array, and extract each address[i]
         for (uint i = 0; i < arrayofvoter.length; i++) {
 
-        require(
-            !voters[arrayofvoter[i]].voted,
-            "The voter already voted."
-        );
         require(voters[arrayofvoter[i]].weight == 0);
         voters[arrayofvoter[i]].weight = 1;
     }
